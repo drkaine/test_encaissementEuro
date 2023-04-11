@@ -22,4 +22,11 @@ class EncaissementEuroTest extends TestCase
         $convertisseur = new Convertisseur();
         $this->assertEquals(false, $convertisseur->calculPrixTransaction(116));
     }
+
+    public function testEncaissementEuro(): void
+    {
+        $convertisseur = new Convertisseur();
+
+        $this->assertEquals(313.35, $convertisseur->encaissementEuro([100, 150, 30, 80]));
+    }
 }

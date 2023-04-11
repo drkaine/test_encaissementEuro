@@ -15,7 +15,7 @@ class Convertisseur
         $listEnEuro = [];
 
         foreach($listDeDollars as $dollar) {
-            $listEnEuro[] = $dollar / $this->tauxChangeDollarEnEuro;
+            $listEnEuro[] = round(($dollar / $this->tauxChangeDollarEnEuro), 2);
         }
 
         return $listEnEuro;
@@ -29,7 +29,7 @@ class Convertisseur
         return $this->prixTransaction;
     }
 
-    public function encaissementEuro(array $listEnDollars): int
+    public function encaissementEuro(array $listEnDollars): float
     {
         $listEnEuro = $this->convertirDollarsEnEuro($listEnDollars);
         $encaissementEuro = 0;
@@ -37,7 +37,7 @@ class Convertisseur
         foreach($listEnEuro as $valeurEuro) {
             $encaissementEuroValeur = $this->calculPrixTransaction($valeurEuro);
             if($encaissementEuroValeur) {
-                $encaissementEuro -= $encaissementEuroValeur;
+                $encaissementEuro += $encaissementEuroValeur;
             }
             $encaissementEuro += $valeurEuro;
         }
